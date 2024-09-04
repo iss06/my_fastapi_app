@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from routes.todo import router as todo_router
 
 # FastAPI 앱 생성
 app = FastAPI() # ASGI APP
@@ -7,6 +8,10 @@ app = FastAPI() # ASGI APP
 @app.get("/") # GET메서드로 / url을 호출할 수 있는 엔드포인트
 def hello():
     return {"message": "Hello FastAPI"} # JSON 형식으로 응답 반환
+
+# 라우터 등록
+app.include_router(todo_router)
+
 
 # 모든 엔드포인트는 Swagger UI에 등록
 # 만약 Swagger UI에 표시하고 싶지 않을 때
