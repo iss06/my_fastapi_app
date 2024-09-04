@@ -29,3 +29,11 @@ async def read_users(age:int,
             description="쿼리 파라미터로 리스트 받기")
 async def read_items_multi(item: Optional[List[str]] = Query(None)):
     return {"items": item}
+
+#필수 쿼리 파라미터
+#/search/?keyword=
+#...: Ellipse -> 필수 파라미터
+@router.get("/search/")
+async def search_item(keyword:str = Query(...,
+                                          min_length=3)):
+    return {"keyword": keyword}
